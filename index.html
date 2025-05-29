@@ -14,6 +14,16 @@
     .projeto { background: white; padding: 15px; margin-top: 10px; border-radius: 10px; box-shadow: 0 2px 5px rgba(0,0,0,0.1); }
     footer { text-align: center; padding: 15px; background: #0077cc; color: white; }
     a { color: #0077cc; text-decoration: none; }
+
+    @keyframes fadeIn {
+  from { opacity: 0; transform: translateY(20px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+.projeto {
+  animation: fadeIn 0.8s ease forwards;
+}
+
   </style>
 </head>
 <body>
@@ -36,7 +46,7 @@
         <h3>Sistema de Controle de Estoque</h3>
         <p>Aplicativo web simples para controle de produtos, com adição, remoção e cálculo de totais. Criado com HTML, CSS e JavaScript.</p>
         <img src="/img/prt_sysEst01.png" alt="sistema de estoque Print" style="width: 100%;height: 400px;">
-        <a href="/estoque.html" target="_blank">Testar Funcionalidade</a>
+        <a href="estoque.html" target="_blank">Testar Funcionalidade</a>
       </div>
       <div class="projeto">
         <h3>Planilha Financeira Pessoal</h3>
