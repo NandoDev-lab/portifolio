@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Sistema de Controle de Estoque</title>
+  <style>
+    body { font-family: Arial, sans-serif; background-color: #f4f4f4; padding: 20px; }
+    h1 { color: #333; }
+    input, button { margin: 5px; padding: 8px; }
+    table { width: 100%; border-collapse: collapse; margin-top: 20px; }
+    th, td { border: 1px solid #ccc; padding: 10px; text-align: center; }
+    th { background-color: #eee; }
+    .container { background: white; padding: 20px; border-radius: 10px; max-width: 800px; margin: auto; box-shadow: 0 2px 8px rgba(0,0,0,0.1); }
+  </style>
+</head>
+<body>
+<div class="container">
+  <h1>Controle de Estoque</h1>
+  <input type="text" id="nome" placeholder="Nome do Produto">
+  <input type="number" id="quantidade" placeholder="Quantidade">
+  <input type="number" id="valor" placeholder="Valor (R$)">
+  <button onclick="adicionarProduto()">Adicionar</button>
+
+  <table>
+    <thead>
+      <tr>
+        <th>Produto</th>
+        <th>Quantidade</th>
+        <th>Valor (R$)</th>
+        <th>Total (R$)</th>
+        <th>Ações</th>
+      </tr>
+    </thead>
+    <tbody id="tabela-produtos">
+    </tbody>
+  </table>
+</div>
+
+<script>
+  let produtos = [];
+
+  function adicionarProduto() {
+    const nome = document.getElementById('nome').value;
+    const quantidade = parseInt(document.getElementById('quantidade').value);
+    const valor = parseFloat(document.getElementById('valor').value);
+
+    if (nome && quantidade > 0 && valor > 0) {
+      produtos.push({ nome, quantidade, valor });
+      atualizarTabela();
+      limparCampos();
+    } else {
+      alert('Preencha todos os campos corretamente.');
+    }
+  }
+
+  function removerProduto(index) {
+    produtos.splice(index, 1);
+    atualizarTabela();
+  }
+
+  function atualizarTabela() {
+    const tabela = document.getElementById('tabela-produtos');
+    tabela.innerHTML = '';
+
+    produtos.forEach((produto, index) => {
+      const row = `<tr>
+        <td>${produto.nome}</td>
+        <td>${produto.quantidade}</td>
+        <td>R$ ${produto.valor.toFixed(2)}</td>
+        <td>R$ ${(produto.quantidade * produto.valor).toFixed(2)}</td>
+        <td><button onclick="removerProduto(${index})">Remover</button></td>
+      </tr>`;
+      tabela.innerHTML += row;
+    });
+  }
+
+  function limparCampos() {
+    document.getElementById('nome').value = '';
+    document.getElementById('quantidade').value = '';
+    document.getElementById('valor').value = '';
+  }
+</script>
+</body>
+</html>
